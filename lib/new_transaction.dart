@@ -22,6 +22,8 @@ class _NewTransactionState extends State<NewTransaction> {
     if (title.isEmpty || price <= 0) return;
 
     widget.addTransaction(title, price);
+
+    Navigator.of(context).pop(); // to close topmost screen i.e modal
   }
 
   @override
