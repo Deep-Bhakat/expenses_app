@@ -1,7 +1,6 @@
 import 'package:expenses_app/new_transaction.dart';
 import 'package:expenses_app/transaction.dart';
 import 'package:expenses_app/transaction_list.dart';
-import 'package:expenses_app/user_transactions.dart';
 import 'package:flutter/material.dart';
 
 void main() {
