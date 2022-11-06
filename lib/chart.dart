@@ -1,3 +1,4 @@
+import 'package:expenses_app/chart_bars.dart';
 import 'package:expenses_app/transaction.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -21,7 +22,16 @@ class Chart extends StatelessWidget {
           totalSum += recentTransactions[i].price;
         }
       }
-      return {'day': DateFormat.E(weekDay), 'amount': totalSum};
+      return {
+        'day': DateFormat.E().format(weekDay).substring(0, 1),
+        'amount': totalSum
+      };
+    });
+  }
+
+  double get totalSpendings {
+    return groupedTransactionValues.fold(0.0, (previousValue, element) {
+      return previousValue + double.parse(element['amount'].toString());
     });
   }
 
@@ -30,7 +40,15 @@ class Chart extends StatelessWidget {
     return Card(
       elevation: 6,
       margin: EdgeInsets.all(20),
-      child: Row(children: []),
+      child: Row(
+          children: groupedTransactionValues.map((e) {
+        return ChartBar(
+            e['day'].toString(),
+            double.parse(e['amount'].toString()),
+            totalSpendings == 0.0
+                ? 0.0
+                : double.parse(e['amount'].toString()) / totalSpendings);
+      }).toList()),
     );
   }
 }
