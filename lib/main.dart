@@ -41,6 +41,12 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
+  void _deleteTransaction(String id) {
+    setState(() {
+      transactions.removeWhere((item) => item.id == id);
+    });
+  }
+
   void startNewTransaction(BuildContext ctx) {
     showModalBottomSheet(
         context: ctx,
@@ -76,7 +82,10 @@ class _MyHomePageState extends State<MyHomePage> {
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [Chart(_recentTransactions), TransactionList(transactions)],
+          children: [
+            Chart(_recentTransactions),
+            TransactionList(transactions, _deleteTransaction)
+          ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
