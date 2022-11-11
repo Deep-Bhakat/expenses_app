@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:expenses_app/chart.dart';
 import 'package:expenses_app/new_transaction.dart';
 import 'package:expenses_app/transaction.dart';
@@ -134,11 +136,13 @@ class _MyHomePageState extends State<MyHomePage> {
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-          child: Icon(Icons.add),
-          onPressed: () {
-            startNewTransaction(context);
-          }),
+      floatingActionButton: Platform.isIOS
+          ? Container()
+          : FloatingActionButton(
+              child: Icon(Icons.add),
+              onPressed: () {
+                startNewTransaction(context);
+              }),
       // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
